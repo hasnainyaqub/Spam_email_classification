@@ -8,6 +8,15 @@ from nltk.stem.porter import PorterStemmer
 nltk.download('punkt')
 nltk.download('stopwords')
 
+import nltk
+
+# Ensure necessary NLTK data is downloaded
+for resource in ["punkt", "stopwords"]:
+    try:
+        nltk.data.find(resource if resource != "punkt" else "tokenizers/punkt")
+    except LookupError:
+        nltk.download(resource)
+
 
 # Load models
 tfidf = pickle.load(open('Requirs/vectorizer.pkl', 'rb'))
