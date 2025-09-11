@@ -4,6 +4,11 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
+# Download required NLTK resources
+nltk.download('punkt')
+nltk.download('stopwords')
+
+
 # Load models
 tfidf = pickle.load(open('Requirs/vectorizer.pkl', 'rb'))
 model = pickle.load(open('Requirs/model.pkl', 'rb'))
