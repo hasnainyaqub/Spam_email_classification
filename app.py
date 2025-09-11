@@ -5,17 +5,30 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
 # Download required NLTK resources
-nltk.download('punkt')
-nltk.download('stopwords')
-
 import nltk
 
-# Ensure necessary NLTK data is downloaded
-for resource in ["punkt", "stopwords"]:
+# Ensure required NLTK data is available
+for resource in ["punkt", "punkt_tab", "stopwords"]:
     try:
-        nltk.data.find(resource if resource != "punkt" else "tokenizers/punkt")
+        if resource == "punkt":
+            nltk.data.find("tokenizers/punkt")
+        elif resource == "punkt_tab":
+            nltk.data.find("tokenizers/punkt_tab")
+        elif resource == "stopwords":
+            nltk.data.find("corpora/stopwords")
     except LookupError:
         nltk.download(resource)
+import re
+
+def simple_tokenize(text):
+    return re.findall(r"\b\w+\b", text.lower())
+def transform_text(text):
+    text = text.lower()
+    tokens = simple_tokenize(text)  # replaced word_tokenize
+    tokens = [word for word in tokens if word.isalnum()]
+    tokens = [word for word in tokens if word not in stop_words]
+    tokens = [ps.stem(word) for word in tokens]
+    return " ".join(tokens)
 
 
 # Load models
