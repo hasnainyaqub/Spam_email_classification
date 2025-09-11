@@ -5,8 +5,8 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
 # Load models
-tfidf = pickle.load(open('Requirs/vectorizer.pkl', 'rb'))
-model = pickle.load(open('Requirs/model.pkl', 'rb'))
+tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 # Preprocessing
 ps = PorterStemmer()
@@ -30,11 +30,7 @@ st.sidebar.markdown("""
 - Recall:    `0.9866`  
 - F1-Score:  `0.9870`  
 """)
-st.sidebar.markdown("---")
-st.sidebar.subheader("🌐 Connect with Me")
-st.sidebar.write("[LinkedIn](https://www.linkedin.com/in/hasnainyaqoob/)")
-st.sidebar.write("[GitHub](https://github.com/hasnainyaqub)")
-st.sidebar.write("[Kaggle](https://www.kaggle.com/hasnainyaqooob)")
+
 # Streamlit UI
 st.title("📧 Spam Message Classifier")
 
@@ -62,14 +58,12 @@ if st.button('Predict'):
 # --- Sample Messages ---
 st.subheader("📌 Try with these sample messages")
 
-col1, col2 = st.columns(2)
-
 spam_examples = [
+    "Congratulations! You've won a free iPhone. Click the link to claim now.",
     "Get rich quick! Work from home and earn $5000 weekly.",
     "Exclusive deal! Limited time offer, buy now and save 70%.",
     "Claim your lottery prize today. Reply with your bank details.",
     "Urgent! Your account has been suspended. Verify immediately.",
-    "Congratulations! You've won a free iPhone. Click the link to claim now.",
     "You have been selected for a $1000 Walmart gift card. Click here.",
     "This is not a joke! You have won a cruise trip to the Bahamas.",
     "Final notice: Pay your overdue bill to avoid penalty.",
@@ -91,38 +85,20 @@ ham_examples = [
 
 
 
-with col1:
-    st.write("### ✅ Ham Examples")
-    for msg in ham_examples:
-        st.code(msg)
 
-with col2:
-    st.write("### 🚨 Spam Examples")
-    for msg in spam_examples:
-        st.code(msg)
+st.write("### 🚨 Spam Examples")
+for msg in spam_examples:
+    st.code(msg)
+
+st.write("### ✅ Ham Examples")
+for msg in ham_examples:
+    st.code(msg)
 
 # --- Dataset & Disclaimer ---
 st.subheader("ℹ️ About this Project")
 st.markdown("""
 This model was trained on the [Email Spam Classification Dataset](https://www.kaggle.com/datasets/purusinghvi/email-spam-classification-dataset) from Kaggle.  
 
-### 📊 Dataset Information
-- **RangeIndex:** 83,448 entries (0 to 83,447)  
-- **Columns (2):**  
-  - `label` → 83,448 non-null, `int64`  
-  - `text` → 83,448 non-null, `object`  
-- **Memory usage:** ~1.3 MB  
-
-**Label meaning:**  
-- `1` → Spam email (43,910 entries)  
-- `0` → Ham/legitimate email (39,538 entries)  
-
-**Text column:**  
-Contains the actual email message content used for classification.  
-
----
-
-### ⚠️ Disclaimer
 While the model achieves **high accuracy** on test data, it is **not a large-scale production model**.  
 It may sometimes **predict wrongly** and should **not** be used for critical filtering tasks (like banking, security, or healthcare).  
 
