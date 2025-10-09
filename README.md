@@ -1,4 +1,4 @@
-# 📧 Spam Email Classification (Streamlit App) [Click here to try the app](https://myspamemail.streamlit.app/)  
+# 📧  [Spam Email Classification (Streamlit App)](https://myspamemail.streamlit.app/)  
 
 This project is a **Spam Email Classifier** built using **Machine Learning** and deployed with **Streamlit**. The model predicts whether an email message is **Spam** or **Ham (legitimate)** based on text content.  
 
